@@ -8,12 +8,16 @@ const url = 'http://api.openweathermap.org/data/2.5/weather?appid=01cc3765573683
 
 function getTempByCityName(cityName, cb) {
     request(url + cityName, (err, response, body) => {
+        if (err) return cb(err, null);
         temp = JSON.parse(body).main.temp;
-        cb(temp);
+        cb(null, temp);
     });
 }
 
-getTempByCityName('Saigon', temp => console.log(temp));
-getTempByCityName('Hanoi', t => console.log('Hanoi: ' + t));
+getTempByCityName('Saigon', (err, temp) => {
+    if(err) return console.log(err);
+    console.log(temp);
+});
+// getTempByCityName('Hanoi', t => console.log('Hanoi: ' + t));
 // getTempByCityName('Tokyo');
 // console.log(sgTemp);
