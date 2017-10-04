@@ -37,34 +37,13 @@ function chiaPromise(a, b) {
     });
 }
 
-// (a + b) * h / 2
-
-function tinhDienTich(a, b, h) {
-    return Promise.all([
-        congPromise(a, b),
-        chiaPromise(h, '2')
-    ])
-    .then(x => nhanPromise(x[0], x[1]));
+async function tinhDienTich(a, b, h) {
+    const tong = await congPromise(a, b);
+    const tich = await nhanPromise(tong, h);
+    const kq = await chiaPromise(tich, 2);
+    return kq;
 }
 
-// tinhDienTich(4, 5, 6)
-// .then(kq => console.log(kq))
-// .catch(err => console.log(err.message));
-
-// Promise.race([
-//     congPromise(5, 6),
-//     chiaPromise(8, 2)
-// ])
-// .then(x => console.log(x))
-// .catch(err => console.log(err.message));
-
-congPromise(4, 5)
-.then(tong => {
-    tong = tong * tong;
-    return nhanPromise(tong, 6); 
-})
-.then(kq => console.log(kq));
-
-// congPromise(4, 5)
-// .then(tong => 100)
-// .then(kq => console.log(kq));
+tinhDienTich(4, 5, 6)
+.then(kq => console.log(kq))
+.catch(err => console.log(err.message));
