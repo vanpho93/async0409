@@ -21,3 +21,11 @@ getTempByCityName('Saigon', (err, temp) => {
 // getTempByCityName('Hanoi', t => console.log('Hanoi: ' + t));
 // getTempByCityName('Tokyo');
 // console.log(sgTemp);
+
+function getTempPromise(cityName) {
+
+}
+
+getTempPromise('Saigon')
+.then(temp => console.log(temp))
+.catch(err => console.log(err.message);)
