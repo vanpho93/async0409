@@ -14,18 +14,24 @@ function getTempByCityName(cityName, cb) {
     });
 }
 
-getTempByCityName('Saigon', (err, temp) => {
-    if(err) return console.log(err);
-    console.log(temp);
-});
+// getTempByCityName('Saigon', (err, temp) => {
+//     if(err) return console.log(err);
+//     console.log(temp);
+// });
 // getTempByCityName('Hanoi', t => console.log('Hanoi: ' + t));
 // getTempByCityName('Tokyo');
 // console.log(sgTemp);
 
 function getTempPromise(cityName) {
-
+    return new Promise((resolve, reject) => {
+        request(url + cityName, (err, response, body) => {
+            if (err) return reject(err);
+            temp = JSON.parse(body).main.temp;
+            resolve(temp);
+        });
+    });
 }
 
-getTempPromise('Saigon')
+getTempPromise('Danang')
 .then(temp => console.log(temp))
-.catch(err => console.log(err.message);)
+.catch(err => console.log(err.message));
